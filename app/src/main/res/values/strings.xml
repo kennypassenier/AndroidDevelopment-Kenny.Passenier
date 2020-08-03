@@ -5,4 +5,5 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="addMovieButton">Add new movie</string>
     <string name="movieName">Name of the movie</string>
+    <string name="movieAddedText">Movie has been added to the database</string>
 </resources>

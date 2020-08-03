@@ -5,4 +5,5 @@
     <string name="tab_text_2">Voeg ifilm toe</string>
     <string name="addMovieButton">Voeg nieuwe film toe</string>
     <string name="movieName">Naam van de film</string>
+    <string name="movieAddedText">Film is toegevoegd aan de database</string>
 </resources>
