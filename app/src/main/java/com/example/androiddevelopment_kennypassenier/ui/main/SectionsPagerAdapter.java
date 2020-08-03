@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.example.androiddevelopment_kennypassenier.AddMovieFragment;
 import com.example.androiddevelopment_kennypassenier.R;
 import com.example.androiddevelopment_kennypassenier.MainListViewFragment;
 
@@ -34,15 +35,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         switch(position){
             case 0:
                 return new MainListViewFragment();
-            case 1:
-                break;
-
+            default:
+                return new AddMovieFragment();
         }
-
-
-
-
-        return new MainListViewFragment();
     }
 
     @Nullable
