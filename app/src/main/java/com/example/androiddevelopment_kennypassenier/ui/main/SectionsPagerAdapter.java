@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.androiddevelopment_kennypassenier.R;
+import com.example.androiddevelopment_kennypassenier.MainListViewFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -32,7 +33,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         switch(position){
             case 0:
-                return ItemFragment.newInstance(1);
+                return new MainListViewFragment();
             case 1:
                 break;
 
@@ -41,7 +42,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
 
 
-        return PlaceholderFragment.newInstance(position + 1);
+        return new MainListViewFragment();
     }
 
     @Nullable
