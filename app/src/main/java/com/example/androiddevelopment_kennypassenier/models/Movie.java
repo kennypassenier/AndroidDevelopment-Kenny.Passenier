@@ -1,4 +1,4 @@
-package com.example.androiddevelopment_kennypassenier.ui.main;
+package com.example.androiddevelopment_kennypassenier.models;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
@@ -11,7 +11,7 @@ import java.util.List;
 @Entity(tableName = "movies")
 public class Movie {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long id;
     @ColumnInfo(name = "title")
     private String title;
@@ -30,7 +30,7 @@ public class Movie {
 
     @Override
     public String toString(){
-        return title;
+        return title + " - " + releaseDate;
     }
 
     public long getId() {

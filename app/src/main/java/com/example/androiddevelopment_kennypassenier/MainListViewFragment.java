@@ -1,6 +1,7 @@
 package com.example.androiddevelopment_kennypassenier;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,14 +12,23 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import com.example.androiddevelopment_kennypassenier.models.GetAllMoviesDelegate;
+import com.example.androiddevelopment_kennypassenier.models.Movie;
+import com.example.androiddevelopment_kennypassenier.models.MovieDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class MainListViewFragment extends Fragment {
+public class MainListViewFragment extends Fragment implements GetAllMoviesDelegate{
 
 
-    private String[] mMenuItems;
+
     private ListView mListView;
+    private List<Movie> mMovies;
+    private ArrayAdapter mListViewAdapter;
+
 
     public MainListViewFragment() {
         // Required empty public constructor
@@ -29,34 +39,75 @@ public class MainListViewFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list_view, container, false);
 
-        // Todo populate list with database items
-        mMenuItems = new String[]{
-                "First item",
-                "Second item",
-                "Third item",
-                "Etc"
-        };
-
+        // Instantieer een lege lijst om null reference te voorkomen
+        mMovies = new ArrayList<Movie>();
+        // Start een async task
+        updateMovies();
+        // Zet de listview als member variabele
         mListView = view.findViewById(R.id.frgmt_list);
-        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<>(
-                getActivity(),
-                android.R.layout.simple_list_item_1,
-                mMenuItems
-        );
-
-        mListView.setAdapter(listViewAdapter);
-
+        // Stel de adapter in
+        updateAdapter();
+        // Event listener voor als er op een item uit de lijst geklikt wordt
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                // Start een intent met het id van de film als parameter voor de nieuwe activity
                 Intent intent = new Intent(getContext(), MovieDetailActivity.class);
-                intent.putExtra("course_position", position);
+                intent.putExtra("movie_id", position + 1);
                 startActivity(intent);
             }
         });
-
-
-        // Inflate the layout for this fragment
         return view;
     }
+
+    private void updateAdapter() {
+        mListViewAdapter = new ArrayAdapter<>(
+                getActivity(),
+                android.R.layout.simple_list_item_1,
+                mMovies
+        );
+
+        mListView.setAdapter(mListViewAdapter);
+    }
+
+    // Call naar asyncTask zodat we de UI thread vrijwaren van een zware taak.
+    private void updateMovies(){
+        new GetAllMoviesAsyncTask(this).execute();
+    }
+
+    @Override
+    public void onMoviesRetrieved(List<Movie> movies) {
+        mMovies = movies;
+        // Ik had eerst geprobeerd om mListViewAdapter.notifyDataSetChanged(); te gebruiken, maar dat wilde niet werken
+        // Daarmee deze call naar updateAdapter
+        updateAdapter();
+    }
+
+    public class GetAllMoviesAsyncTask extends AsyncTask<List<Movie>, Void, List<Movie>>{
+        private MovieDatabase db;
+        private GetAllMoviesDelegate mGetAllMoviesDelegate;
+
+        public GetAllMoviesAsyncTask(GetAllMoviesDelegate delegate) {
+            this.db = MainActivity.mMovieDatabase;
+            this.mGetAllMoviesDelegate = delegate;
+        }
+
+        @Override
+        protected void onPostExecute(List<Movie> movies) {
+            super.onPostExecute(movies);
+            mGetAllMoviesDelegate.onMoviesRetrieved(movies);
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected List<Movie> doInBackground(List<Movie>... lists) {
+            return db.movieDAO().getAll();
+        }
+    }
+
+
 }

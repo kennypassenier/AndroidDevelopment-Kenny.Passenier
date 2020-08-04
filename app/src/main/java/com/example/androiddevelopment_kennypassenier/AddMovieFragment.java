@@ -1,10 +1,12 @@
 package com.example.androiddevelopment_kennypassenier;
 
-import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +14,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.androiddevelopment_kennypassenier.ui.main.Movie;
+import com.example.androiddevelopment_kennypassenier.models.Movie;
+import com.example.androiddevelopment_kennypassenier.models.MovieDatabase;
 
 public class AddMovieFragment extends Fragment {
 
 
     private EditText mAddNewMovieText;
     private Button mAddNewMovieButton;
-    private AddMovieListener mActivityCallback;
 
     public AddMovieFragment() {
         // Required empty public constructor
@@ -49,7 +51,6 @@ public class AddMovieFragment extends Fragment {
                     // todo once we have the json data, we can insert the data into our database
                     // Add a movie
                     Movie userMovie = new Movie();
-                    userMovie.setId(1);
                     userMovie.setDirector("Ridley Scott");
                     userMovie.setTitle("Prometheus");
                     userMovie.setPlot("Following clues to the origin of mankind, a team finds a structure on a distant moon, but they soon realize they are not alone.\n" +
@@ -57,11 +58,15 @@ public class AddMovieFragment extends Fragment {
                     userMovie.setReleaseDate(2012);
                     userMovie.setPosterUrl("https://m.media-amazon.com/images/M/MV5BMTY3NzIyNTA2NV5BMl5BanBnXkFtZTcwNzE2NjI4Nw@@._V1_SY264_CR0,0,178,264_AL_.jpg");
 
+                    new AddSingleMovieAsyncTask().execute(userMovie);
 
-                    mActivityCallback.addMovie(userMovie);
-
+                    // Todo remove
+                    //MainActivity.mMovieDatabase.movieDAO().insert(userMovie);
+                    //mActivityCallback.addMovie(userMovie);
+                    Log.d("ADDMOVIE", "onClick: Adding movie");
                     Toast.makeText(getContext(), R.string.movieAddedText, Toast.LENGTH_SHORT);
-
+                    Intent intent = new Intent(getContext(), MainActivity.class);
+                    startActivity(intent);
 
                 }
             }
@@ -70,22 +75,20 @@ public class AddMovieFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onAttach(Context context){
-        super.onAttach(context);
+    public class AddSingleMovieAsyncTask extends AsyncTask<Movie, Void, Void> {
+        private MovieDatabase db;
 
-        if(context instanceof AddMovieListener){
-            mActivityCallback = (AddMovieListener) context;
+
+        public AddSingleMovieAsyncTask() {
+            this.db = MainActivity.mMovieDatabase;
+        }
+
+        @Override
+        protected Void doInBackground(Movie... movies) {
+            db.movieDAO().insert(movies[0]);
+            return null;
         }
     }
 
-    @Override
-    public void onDetach(){
-        super.onDetach();
-        mActivityCallback = null;
-    }
 
-    public interface AddMovieListener{
-        void addMovie(Movie movie);
-    }
 }

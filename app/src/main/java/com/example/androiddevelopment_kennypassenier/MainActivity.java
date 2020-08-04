@@ -1,28 +1,27 @@
 package com.example.androiddevelopment_kennypassenier;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
-import com.example.androiddevelopment_kennypassenier.ui.main.Movie;
-import com.example.androiddevelopment_kennypassenier.ui.main.MovieDatabase;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.androiddevelopment_kennypassenier.models.Movie;
+import com.example.androiddevelopment_kennypassenier.models.MovieDatabase;
+import com.example.androiddevelopment_kennypassenier.models.MovieRepository;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.room.Room;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-
 import com.example.androiddevelopment_kennypassenier.ui.main.SectionsPagerAdapter;
 
-public class MainActivity extends AppCompatActivity implements AddMovieFragment.AddMovieListener {
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity {
 
 
-    public static MovieDatabase movieDatabase;
+    public static MovieDatabase mMovieDatabase;
 
+    public static MovieRepository mMovieRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +36,12 @@ public class MainActivity extends AppCompatActivity implements AddMovieFragment.
 
         // Initialise and create the database
         // Todo stop allowing the database operations on the main thread
-        movieDatabase = Room.databaseBuilder(getApplicationContext(), MovieDatabase.class, "moviedb").allowMainThreadQueries().build();
-
-
-
-    }
-
-    @Override
-    public void addMovie(Movie movie) {
-        movieDatabase.movieDAO().insert(movie);
+        //mMovieRepository = MovieRepository.getInstance(this);
+        mMovieDatabase = Room.databaseBuilder(getApplicationContext(), MovieDatabase.class, "moviedb").build();
 
     }
+
+
+
+
 }

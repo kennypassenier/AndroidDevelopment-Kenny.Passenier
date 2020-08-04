@@ -1,4 +1,4 @@
-package com.example.androiddevelopment_kennypassenier.ui.main;
+package com.example.androiddevelopment_kennypassenier.models;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -8,6 +8,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -24,6 +25,9 @@ public interface MovieDAO {
 
     @Query("SELECT * FROM movies")
     List<Movie> getAll();
+
+    @Query("SELECT * from movies where id= :id")
+    Movie getMovie(int id);
 
     @Query("DELETE FROM movies")
     void deleteAll();
