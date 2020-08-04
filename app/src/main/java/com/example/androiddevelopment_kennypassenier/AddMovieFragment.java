@@ -6,18 +6,26 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.androiddevelopment_kennypassenier.models.AddMovieDelegate;
 import com.example.androiddevelopment_kennypassenier.models.Movie;
 import com.example.androiddevelopment_kennypassenier.models.MovieDatabase;
 
-public class AddMovieFragment extends Fragment {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class AddMovieFragment extends Fragment implements AddMovieDelegate {
 
 
     private EditText mAddNewMovieText;
@@ -49,24 +57,59 @@ public class AddMovieFragment extends Fragment {
                     //String testData = OMDBDataSingleton.getInstance().downloadPlainText(dataUrl);
 
                     // todo once we have the json data, we can insert the data into our database
-                    // Add a movie
-                    Movie userMovie = new Movie();
-                    userMovie.setDirector("Ridley Scott");
-                    userMovie.setTitle("Prometheus");
-                    userMovie.setPlot("Following clues to the origin of mankind, a team finds a structure on a distant moon, but they soon realize they are not alone.\n" +
-                            "\n");
-                    userMovie.setReleaseDate(2012);
-                    userMovie.setPosterUrl("https://m.media-amazon.com/images/M/MV5BMTY3NzIyNTA2NV5BMl5BanBnXkFtZTcwNzE2NjI4Nw@@._V1_SY264_CR0,0,178,264_AL_.jpg");
 
-                    new AddSingleMovieAsyncTask().execute(userMovie);
 
-                    // Todo remove
-                    //MainActivity.mMovieDatabase.movieDAO().insert(userMovie);
-                    //mActivityCallback.addMovie(userMovie);
-                    Log.d("ADDMOVIE", "onClick: Adding movie");
-                    Toast.makeText(getContext(), R.string.movieAddedText, Toast.LENGTH_SHORT);
-                    Intent intent = new Intent(getContext(), MainActivity.class);
-                    startActivity(intent);
+
+
+
+                    // Instantiate the RequestQueue.
+                    RequestQueue queue = Volley.newRequestQueue(getContext());
+                    String url = String.format("https://www.omdbapi.com/?t=%s&plot=full&apikey=48ba3731", mAddNewMovieText.getText().toString());
+
+                    // Request a string response from the provided URL.
+                    StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+
+                                    // Correcte response
+
+                                    try {
+                                        // Response omzetten naar JSON
+                                        JSONObject jsonObject = new JSONObject(response);
+                                        String title = jsonObject.getString("Title");
+                                        String plot = jsonObject.getString("Plot");
+                                        String director = jsonObject.getString("Director");
+                                        Integer releaseDate = jsonObject.getInt("Year");
+                                        String posterUrl = jsonObject.getString("Poster");
+                                        // JSON gebruiken om nieuwe film gegevens in te vullen
+                                        Movie newMovie = new Movie();
+                                        newMovie.setTitle(title);
+                                        newMovie.setPlot(plot);
+                                        newMovie.setDirector(director);
+                                        newMovie.setReleaseDate(releaseDate);
+                                        newMovie.setPosterUrl(posterUrl);
+                                        // Nieuwe film toevoegen aan de database
+                                        new AddSingleMovieAsyncTask(AddMovieFragment.this).execute(newMovie);
+
+
+                                    } catch (JSONException e) {
+
+                                        // Todo iets met deze error doen, foute responses afvangen
+                                        e.printStackTrace();
+                                    }
+
+
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            mAddNewMovieText.setText(error.toString());
+                        }
+                    });
+
+                    // Add the request to the RequestQueue.
+                    queue.add(stringRequest);
 
                 }
             }
@@ -75,11 +118,20 @@ public class AddMovieFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onMovieAdded() {
+        // We sturen de intent enkel als hij succesvol is opgeslagen in onze database
+        // Anders kan het gebeuren dat deze nieuwe film nog niet voorkomt in onze lijst
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        startActivity(intent);
+    }
+
     public class AddSingleMovieAsyncTask extends AsyncTask<Movie, Void, Void> {
         private MovieDatabase db;
+        private AddMovieDelegate mAddMovieDelegate;
 
-
-        public AddSingleMovieAsyncTask() {
+        public AddSingleMovieAsyncTask(AddMovieDelegate delegate) {
+            this.mAddMovieDelegate = delegate;
             this.db = MainActivity.mMovieDatabase;
         }
 
@@ -87,6 +139,12 @@ public class AddMovieFragment extends Fragment {
         protected Void doInBackground(Movie... movies) {
             db.movieDAO().insert(movies[0]);
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            mAddMovieDelegate.onMovieAdded();
         }
     }
 

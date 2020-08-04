@@ -60,6 +60,12 @@ public class MainListViewFragment extends Fragment implements GetAllMoviesDelega
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateAdapter();
+    }
+
     private void updateAdapter() {
         mListViewAdapter = new ArrayAdapter<>(
                 getActivity(),

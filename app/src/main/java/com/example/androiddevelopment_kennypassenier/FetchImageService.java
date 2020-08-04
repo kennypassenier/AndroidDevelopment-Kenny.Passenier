@@ -14,6 +14,7 @@ import android.content.Context;
 public class FetchImageService extends IntentService {
 
 
+    // Todo use class
     public FetchImageService() {
         super("FetchImageService");
     }

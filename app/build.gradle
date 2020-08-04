@@ -34,9 +34,12 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    // Add dependencies to use Room
+    // Voeg dependency toe om Room te gebruiken -> database
     def room_version = "2.2.5"
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    // Dependency voor Volley -> http requests
+    implementation 'com.android.volley:volley:1.1.1'
 
 }

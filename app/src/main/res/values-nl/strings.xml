@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Android werkstuk - Kenny Passenier</string>
     <string name="tab_text_1">Films</string>
-    <string name="tab_text_2">Voeg ifilm toe</string>
+    <string name="tab_text_2">Voeg film toe</string>
     <string name="addMovieButton">Voeg nieuwe film toe</string>
     <string name="movieName">Naam van de film</string>
     <string name="movieAddedText">Film is toegevoegd aan de database</string>

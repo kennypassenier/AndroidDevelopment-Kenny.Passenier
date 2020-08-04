@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static MovieDatabase mMovieDatabase;
 
-    public static MovieRepository mMovieRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialise and create the database
         // Todo stop allowing the database operations on the main thread
-        //mMovieRepository = MovieRepository.getInstance(this);
         mMovieDatabase = Room.databaseBuilder(getApplicationContext(), MovieDatabase.class, "moviedb").build();
 
     }
