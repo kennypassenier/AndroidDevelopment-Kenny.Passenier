@@ -12,9 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <service
             android:name=".FetchImageService"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <activity android:name=".MovieDetailActivity" />
         <activity

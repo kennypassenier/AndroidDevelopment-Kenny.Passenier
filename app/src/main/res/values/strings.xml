@@ -6,4 +6,8 @@
     <string name="addMovieButton">Add new movie</string>
     <string name="movieName">Name of the movie</string>
     <string name="movieAddedText">Movie has been added to the database</string>
+    <string name="director">Director</string>
+    <string name="plot">Plot</string>
+    <string name="releaseDate">Release date</string>
+    <string name="title">Title</string>
 </resources>

@@ -5,10 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.androiddevelopment_kennypassenier.models.GetAllMoviesDelegate;
 import com.example.androiddevelopment_kennypassenier.models.GetSingleMoviesDelegate;
 import com.example.androiddevelopment_kennypassenier.models.Movie;
 import com.example.androiddevelopment_kennypassenier.models.MovieDatabase;
@@ -16,7 +15,10 @@ import com.example.androiddevelopment_kennypassenier.models.MovieDatabase;
 public class MovieDetailActivity extends AppCompatActivity implements GetSingleMoviesDelegate {
 
     private TextView mTitle;
-    private EditText mBody;
+    private TextView mPlot;
+    private TextView mReleaseDate;
+    private TextView mDirector;
+    private ImageView mImgPlot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +26,10 @@ public class MovieDetailActivity extends AppCompatActivity implements GetSingleM
         setContentView(R.layout.activity_movie_detail);
 
         mTitle = findViewById(R.id.txtTitle);
-        mBody = findViewById(R.id.txtBody);
-
+        mPlot = findViewById(R.id.txtPlot);
+        mDirector = findViewById(R.id.txtDirector);
+        mReleaseDate = findViewById(R.id.txtReleaseDate);
+        mImgPlot = findViewById(R.id.imgPlot);
 
         int listPosition = getIntent().getIntExtra("movie_id", -1);
 
@@ -35,7 +39,9 @@ public class MovieDetailActivity extends AppCompatActivity implements GetSingleM
         if(listPosition != -1){
             getMovie(listPosition);
             mTitle.setText("Loading");
-            mBody.setText("Loading");
+            mPlot.setText("Loading");
+            mDirector.setText("Loading");
+            mReleaseDate.setText("Loading");
         }
         else{
             Log.d("MOVIEDETAILACTIVITY", "onCreate: Wrong list position");
@@ -46,8 +52,9 @@ public class MovieDetailActivity extends AppCompatActivity implements GetSingleM
     @Override
     public void onMovieRetrieved(Movie movie) {
             mTitle.setText(movie.getTitle());
-            mBody.setText(movie.getPlot());
-
+            mPlot.setText(movie.getPlot());
+            mDirector.setText(movie.getDirector());
+            mReleaseDate.setText(movie.getReleaseDate().toString());
     }
 
     private void getMovie(int position){

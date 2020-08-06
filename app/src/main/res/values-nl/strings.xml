@@ -6,4 +6,8 @@
     <string name="addMovieButton">Voeg nieuwe film toe</string>
     <string name="movieName">Naam van de film</string>
     <string name="movieAddedText">Film is toegevoegd aan de database</string>
+    <string name="director">Regisseur</string>
+    <string name="plot">Synopsis</string>
+    <string name="releaseDate">Datum van uitgave</string>
+    <string name="title">Titel</string>
 </resources>
