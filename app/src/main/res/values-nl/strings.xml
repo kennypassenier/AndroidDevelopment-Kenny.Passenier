@@ -10,4 +10,7 @@
     <string name="plot">Synopsis</string>
     <string name="releaseDate">Datum van uitgave</string>
     <string name="title">Titel</string>
+    <string name="darkModeSwitchText">Schakel de donkere modus in</string>
+    <string name="standardLoadingText">Info wordt ingeladen</string>
+    <string name="movieImageContentDescription">Poster afbeelding</string>
 </resources>

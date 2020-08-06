@@ -2,124 +2,32 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_movie_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
     tools:context=".MovieDetailActivity">
 
-    <ImageView
-        android:id="@+id/imgPlot"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtLabelTitle"
-        app:layout_constraintEnd_toEndOf="@+id/txtLabelTitle"
-        app:layout_constraintStart_toStartOf="@+id/txtLabelTitle"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.51"
-        app:layout_constraintVertical_chainStyle="packed"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/txtLabelTitle"
+    <fragment
+        android:id="@+id/movie_detail_text_info_fragment"
+        android:name="com.example.androiddevelopment_kennypassenier.MovieDetailTextInfoFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/title"
-        app:layout_constraintBottom_toTopOf="@+id/txtTitle"
-        app:layout_constraintEnd_toEndOf="@+id/txtTitle"
-        app:layout_constraintStart_toStartOf="@+id/txtTitle"
-        app:layout_constraintTop_toBottomOf="@+id/imgPlot" />
-
-    <TextView
-        android:id="@+id/txtTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="TextView"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtLabelDirector"
-        app:layout_constraintEnd_toEndOf="@+id/txtLabelDirector"
-        app:layout_constraintStart_toStartOf="@+id/txtLabelDirector"
-        app:layout_constraintTop_toBottomOf="@+id/txtLabelTitle" />
-
-    <TextView
-        android:id="@+id/txtLabelDirector"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/director"
-        app:layout_constraintBottom_toTopOf="@+id/txtDirector"
-        app:layout_constraintEnd_toEndOf="@+id/txtDirector"
-        app:layout_constraintStart_toStartOf="@+id/txtDirector"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
-
-    <TextView
-        android:id="@+id/txtDirector"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="TextView"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtLabelReleaseDate"
-        app:layout_constraintEnd_toEndOf="@+id/txtLabelReleaseDate"
-        app:layout_constraintStart_toStartOf="@+id/txtLabelReleaseDate"
-        app:layout_constraintTop_toBottomOf="@+id/txtLabelDirector" />
-
-    <TextView
-        android:id="@+id/txtLabelReleaseDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/releaseDate"
-        app:layout_constraintBottom_toTopOf="@+id/txtReleaseDate"
-        app:layout_constraintEnd_toEndOf="@+id/txtReleaseDate"
-        app:layout_constraintStart_toStartOf="@+id/txtReleaseDate"
-        app:layout_constraintTop_toBottomOf="@+id/txtDirector" />
-
-    <TextView
-        android:id="@+id/txtReleaseDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="TextView"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtLabelPlot"
-        app:layout_constraintEnd_toEndOf="@+id/txtLabelPlot"
-        app:layout_constraintStart_toStartOf="@+id/txtLabelPlot"
-        app:layout_constraintTop_toBottomOf="@+id/txtLabelReleaseDate" />
-
-    <TextView
-        android:id="@+id/txtLabelPlot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/plot"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-        app:layout_constraintEnd_toEndOf="@+id/scrollView2"
-        app:layout_constraintStart_toStartOf="@+id/scrollView2"
-        app:layout_constraintTop_toBottomOf="@+id/txtReleaseDate" />
-
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scrollbarStyle="insideInset"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtLabelPlot">
+        app:layout_constraintTop_toBottomOf="@+id/dark_mode_switch_fragment" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txtPlot"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:text="TextView"
-                android:textSize="18sp" />
-        </LinearLayout>
-    </ScrollView>
-
+    <fragment
+        android:id="@+id/dark_mode_switch_fragment"
+        android:name="com.example.androiddevelopment_kennypassenier.DarkModeSwitchFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/movie_detail_text_info_fragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.060000002"
+        app:layout_constraintVertical_chainStyle="packed" />
 </androidx.constraintlayout.widget.ConstraintLayout>

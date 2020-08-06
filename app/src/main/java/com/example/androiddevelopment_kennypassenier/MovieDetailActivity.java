@@ -1,35 +1,35 @@
 package com.example.androiddevelopment_kennypassenier;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.androiddevelopment_kennypassenier.models.GetSingleMoviesDelegate;
 import com.example.androiddevelopment_kennypassenier.models.Movie;
 import com.example.androiddevelopment_kennypassenier.models.MovieDatabase;
 
-public class MovieDetailActivity extends AppCompatActivity implements GetSingleMoviesDelegate {
+public class MovieDetailActivity extends AppCompatActivity implements GetSingleMoviesDelegate, DarkModeSwitchFragment.DarkModeSwitchListener {
 
-    private TextView mTitle;
-    private TextView mPlot;
-    private TextView mReleaseDate;
-    private TextView mDirector;
-    private ImageView mImgPlot;
+
+    private ConstraintLayout mMainLayout;
+    private MovieDetailTextInfoFragment mMovieDetailTextInfoFragment;
+    private DarkModeSwitchFragment mDarkModeSwitchFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
 
-        mTitle = findViewById(R.id.txtTitle);
-        mPlot = findViewById(R.id.txtPlot);
-        mDirector = findViewById(R.id.txtDirector);
-        mReleaseDate = findViewById(R.id.txtReleaseDate);
-        mImgPlot = findViewById(R.id.imgPlot);
+        // Referentie naar onze layout file zodat we de achtergrond kunnen veranderen bij DarkModeSwitch
+        mMainLayout = findViewById(R.id.activity_movie_detail);
+        // Referentie naar de fragments die we gebruiken in deze activity
+        mMovieDetailTextInfoFragment = (MovieDetailTextInfoFragment) getSupportFragmentManager().findFragmentById(R.id.movie_detail_text_info_fragment);
+        mDarkModeSwitchFragment = (DarkModeSwitchFragment) getSupportFragmentManager().findFragmentById(R.id.dark_mode_switch_fragment);
 
         int listPosition = getIntent().getIntExtra("movie_id", -1);
 
@@ -38,10 +38,6 @@ public class MovieDetailActivity extends AppCompatActivity implements GetSingleM
         // If the default value is -1, something has gone wrong
         if(listPosition != -1){
             getMovie(listPosition);
-            mTitle.setText("Loading");
-            mPlot.setText("Loading");
-            mDirector.setText("Loading");
-            mReleaseDate.setText("Loading");
         }
         else{
             Log.d("MOVIEDETAILACTIVITY", "onCreate: Wrong list position");
@@ -51,14 +47,29 @@ public class MovieDetailActivity extends AppCompatActivity implements GetSingleM
 
     @Override
     public void onMovieRetrieved(Movie movie) {
-            mTitle.setText(movie.getTitle());
-            mPlot.setText(movie.getPlot());
-            mDirector.setText(movie.getDirector());
-            mReleaseDate.setText(movie.getReleaseDate().toString());
+        if(mMovieDetailTextInfoFragment != null){
+            // Zet al dfe informatie van de film in de TextViews van onze fragment
+            mMovieDetailTextInfoFragment.setTitleText(movie.getTitle());
+            mMovieDetailTextInfoFragment.setDirectorText(movie.getDirector());
+            mMovieDetailTextInfoFragment.setPlotText(movie.getPlot());
+            mMovieDetailTextInfoFragment.setReleaseDateText(movie.getReleaseDate().toString());
+        }
     }
 
     private void getMovie(int position){
         new GetSingleMoviesAsyncTask(this).execute(position);
+    }
+
+    @Override
+    public void darkModeToggle(boolean isDarkMode) {
+        if(isDarkMode){
+            mMainLayout.setBackgroundColor(Color.BLACK);
+        }
+        else{
+            mMainLayout.setBackgroundColor(Color.WHITE);
+
+        }
+        mMovieDetailTextInfoFragment.setDarkMode(isDarkMode);
     }
 
 

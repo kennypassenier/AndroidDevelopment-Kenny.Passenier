@@ -10,4 +10,8 @@
     <string name="plot">Plot</string>
     <string name="releaseDate">Release date</string>
     <string name="title">Title</string>
+    <string name="darkModeSwitchText">Toggle dark mode</string>
+    <string name="standardLoadingText">Loading data</string>
+    <string name="movieImageContentDescription">Poster image</string>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>
