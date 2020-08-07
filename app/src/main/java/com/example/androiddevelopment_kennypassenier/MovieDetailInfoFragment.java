@@ -1,8 +1,12 @@
 package com.example.androiddevelopment_kennypassenier;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -12,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class MovieDetailTextInfoFragment extends Fragment {
+public class MovieDetailInfoFragment extends Fragment {
 
     private TextView mTitle;
     private TextView mPlot;
@@ -25,18 +29,11 @@ public class MovieDetailTextInfoFragment extends Fragment {
 
     private ImageView mImgPlot;
 
-    public MovieDetailTextInfoFragment() {
+    public MovieDetailInfoFragment() {
         // Required empty public constructor
     }
 
 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +51,10 @@ public class MovieDetailTextInfoFragment extends Fragment {
         mMDirectorLable = view.findViewById(R.id.txtLabelDirector);
         mMReleaseDateLable = view.findViewById(R.id.txtLabelReleaseDate);
         mMPlotLable = view.findViewById(R.id.txtLabelPlot);
+
+
+
+
         return view;
     }
 
@@ -69,6 +70,10 @@ public class MovieDetailTextInfoFragment extends Fragment {
     }
     public void setPlotText(String info){
         mPlot.setText(info);
+    }
+    public void setPosterImage(Bitmap posterImage) {
+        int test = 0;
+        mImgPlot.setImageBitmap(posterImage);
     }
 
 

@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
 
         <service
-            android:name=".FetchImageService"
+            android:name=".models.FetchImageService"
             android:exported="false" />
 
         <activity android:name=".MovieDetailActivity" />

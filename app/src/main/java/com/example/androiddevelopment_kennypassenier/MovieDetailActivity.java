@@ -2,13 +2,19 @@ package com.example.androiddevelopment_kennypassenier;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.androiddevelopment_kennypassenier.models.FetchImageService;
 import com.example.androiddevelopment_kennypassenier.models.GetSingleMoviesDelegate;
 import com.example.androiddevelopment_kennypassenier.models.Movie;
 import com.example.androiddevelopment_kennypassenier.models.MovieDatabase;
@@ -17,8 +23,12 @@ public class MovieDetailActivity extends AppCompatActivity implements GetSingleM
 
 
     private ConstraintLayout mMainLayout;
-    private MovieDetailTextInfoFragment mMovieDetailTextInfoFragment;
+    private MovieDetailInfoFragment mMovieDetailInfoFragment;
+    // todo maybe we don't need this as a member
     private DarkModeSwitchFragment mDarkModeSwitchFragment;
+    private Intent mFetchImageService;
+    private ImageBroadcastReceiver mImageBroadcastReceiver;
+    private IntentFilter mIntentFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +38,27 @@ public class MovieDetailActivity extends AppCompatActivity implements GetSingleM
         // Referentie naar onze layout file zodat we de achtergrond kunnen veranderen bij DarkModeSwitch
         mMainLayout = findViewById(R.id.activity_movie_detail);
         // Referentie naar de fragments die we gebruiken in deze activity
-        mMovieDetailTextInfoFragment = (MovieDetailTextInfoFragment) getSupportFragmentManager().findFragmentById(R.id.movie_detail_text_info_fragment);
+        mMovieDetailInfoFragment = (MovieDetailInfoFragment) getSupportFragmentManager().findFragmentById(R.id.movie_detail_text_info_fragment);
         mDarkModeSwitchFragment = (DarkModeSwitchFragment) getSupportFragmentManager().findFragmentById(R.id.dark_mode_switch_fragment);
 
-        int listPosition = getIntent().getIntExtra("movie_id", -1);
 
-        Log.d("test", "onCreate: Position?" + listPosition);
+        // Registreer de broadcastreceiver
+        mImageBroadcastReceiver = new ImageBroadcastReceiver();
+        // Maak intent aan waar we onze IntentService aan doorgeven
+        mFetchImageService = new Intent(this, FetchImageService.class);
+        // definieer intent filter
+        mIntentFilter = new IntentFilter();
+        mIntentFilter.addAction(FetchImageService.NOTIFY_IMAGE);
+
+
+
+        int movieId = getIntent().getIntExtra("movie_id", -1);
+
+        Log.d("test", "onCreate: Position?" + movieId);
 
         // If the default value is -1, something has gone wrong
-        if(listPosition != -1){
-            getMovie(listPosition);
+        if(movieId != -1){
+            getMovie(movieId);
         }
         else{
             Log.d("MOVIEDETAILACTIVITY", "onCreate: Wrong list position");
@@ -46,18 +67,38 @@ public class MovieDetailActivity extends AppCompatActivity implements GetSingleM
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        // Registreer onze receiver zolang we actief zijn
+        LocalBroadcastManager.getInstance(this).registerReceiver(mImageBroadcastReceiver, mIntentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Wanneer de activity niet actief is, luisteren we niet naar de broadcastreceiver
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mImageBroadcastReceiver);
+    }
+
+    @Override
     public void onMovieRetrieved(Movie movie) {
-        if(mMovieDetailTextInfoFragment != null){
+        if(mMovieDetailInfoFragment != null){
             // Zet al dfe informatie van de film in de TextViews van onze fragment
-            mMovieDetailTextInfoFragment.setTitleText(movie.getTitle());
-            mMovieDetailTextInfoFragment.setDirectorText(movie.getDirector());
-            mMovieDetailTextInfoFragment.setPlotText(movie.getPlot());
-            mMovieDetailTextInfoFragment.setReleaseDateText(movie.getReleaseDate().toString());
+            mMovieDetailInfoFragment.setTitleText(movie.getTitle());
+            mMovieDetailInfoFragment.setDirectorText(movie.getDirector());
+            mMovieDetailInfoFragment.setPlotText(movie.getPlot());
+            mMovieDetailInfoFragment.setReleaseDateText(movie.getReleaseDate().toString());
+
+            // Start de IntentService waarmee we de imageView gaan opvullen
+            mFetchImageService.putExtra("posterUrl", movie.getPosterUrl());
+            startService(mFetchImageService);
+
         }
     }
 
-    private void getMovie(int position){
-        new GetSingleMoviesAsyncTask(this).execute(position);
+
+    private void getMovie(int id){
+        new GetSingleMoviesAsyncTask(this).execute(id);
     }
 
     @Override
@@ -69,7 +110,7 @@ public class MovieDetailActivity extends AppCompatActivity implements GetSingleM
             mMainLayout.setBackgroundColor(Color.WHITE);
 
         }
-        mMovieDetailTextInfoFragment.setDarkMode(isDarkMode);
+        mMovieDetailInfoFragment.setDarkMode(isDarkMode);
     }
 
 
@@ -96,6 +137,22 @@ public class MovieDetailActivity extends AppCompatActivity implements GetSingleM
         @Override
         protected Movie doInBackground(Integer... integers) {
             return db.movieDAO().getMovie(integers[0]);
+        }
+    }
+
+    private class ImageBroadcastReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // todo remove
+            int test = 0;
+            // De actie uit de intent halen, in ons geval is er momenteel maar 1 actie
+            String action = intent.getAction();
+            if(action != null && action == FetchImageService.NOTIFY_IMAGE){
+                // Bitmap uit de intent halen
+                Bitmap posterImage = (Bitmap) intent.getParcelableExtra("posterImage");
+                mMovieDetailInfoFragment.setPosterImage(posterImage);
+            }
         }
     }
 
