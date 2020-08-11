@@ -34,6 +34,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0-M1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test:rules:1.3.0-alpha03'
 
     // Voeg dependency toe om Room te gebruiken -> database
     def room_version = "2.2.5"
