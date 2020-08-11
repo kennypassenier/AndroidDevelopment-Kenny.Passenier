@@ -12,3 +12,4 @@ Bitmap uit URL halen: https://stackoverflow.com/questions/8992964/android-load-f
 
 Bitmap met intent verzenden: https://stackoverflow.com/questions/2459524/how-can-i-pass-a-bitmap-object-from-one-activity-to-another/2459624
 
+StringRequest: https://developer.android.com/training/volley/simple
