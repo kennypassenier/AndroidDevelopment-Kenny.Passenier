@@ -1,4 +1,4 @@
-package com.example.androiddevelopment_kennypassenier.ui.main;
+package com.kennypassenier.androiddevelopment_kennypassenier.ui.main;
 
 import android.content.Context;
 
@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.androiddevelopment_kennypassenier.AddMovieFragment;
-import com.example.androiddevelopment_kennypassenier.R;
-import com.example.androiddevelopment_kennypassenier.MainListViewFragment;
+import com.kennypassenier.androiddevelopment_kennypassenier.AddMovieFragment;
+import com.kennypassenier.androiddevelopment_kennypassenier.R;
+import com.kennypassenier.androiddevelopment_kennypassenier.MainListViewFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to

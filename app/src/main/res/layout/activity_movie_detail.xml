@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/movie_detail_text_info_fragment"
-        android:name="com.example.androiddevelopment_kennypassenier.MovieDetailInfoFragment"
+        android:name="com.kennypassenier.androiddevelopment_kennypassenier.MovieDetailInfoFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/dark_mode_switch_fragment"
-        android:name="com.example.androiddevelopment_kennypassenier.DarkModeSwitchFragment"
+        android:name="com.kennypassenier.androiddevelopment_kennypassenier.DarkModeSwitchFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/movie_detail_text_info_fragment"

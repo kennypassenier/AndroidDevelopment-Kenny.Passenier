@@ -1,15 +1,15 @@
-package com.example.androiddevelopment_kennypassenier;
+package com.kennypassenier.androiddevelopment_kennypassenier;
 
 import android.os.Bundle;
 
-import com.example.androiddevelopment_kennypassenier.models.MovieDatabase;
+import com.kennypassenier.androiddevelopment_kennypassenier.models.MovieDatabase;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.room.Room;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.androiddevelopment_kennypassenier.ui.main.SectionsPagerAdapter;
+import com.kennypassenier.androiddevelopment_kennypassenier.ui.main.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
     public static MovieDatabase mMovieDatabase;

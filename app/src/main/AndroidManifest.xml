@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.androiddevelopment_kennypassenier">
+    package="com.kennypassenier.androiddevelopment_kennypassenier">
 
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,12 +14,12 @@
         android:theme="@style/AppTheme">
 
         <service
-            android:name=".models.FetchImageService"
+            android:name="com.kennypassenier.androiddevelopment_kennypassenier.models.FetchImageService"
             android:exported="false" />
 
-        <activity android:name=".MovieDetailActivity" />
+        <activity android:name="com.kennypassenier.androiddevelopment_kennypassenier.MovieDetailActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.kennypassenier.androiddevelopment_kennypassenier.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

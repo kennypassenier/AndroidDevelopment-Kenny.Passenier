@@ -1,4 +1,4 @@
-package com.example.androiddevelopment_kennypassenier;
+package com.kennypassenier.androiddevelopment_kennypassenier;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -13,9 +13,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.androiddevelopment_kennypassenier.models.GetAllMoviesDelegate;
-import com.example.androiddevelopment_kennypassenier.models.Movie;
-import com.example.androiddevelopment_kennypassenier.models.MovieDatabase;
+import com.kennypassenier.androiddevelopment_kennypassenier.models.GetAllMoviesDelegate;
+import com.kennypassenier.androiddevelopment_kennypassenier.models.Movie;
+import com.kennypassenier.androiddevelopment_kennypassenier.models.MovieDatabase;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.androiddevelopment_kennypassenier.models;
+package com.kennypassenier.androiddevelopment_kennypassenier.models;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;

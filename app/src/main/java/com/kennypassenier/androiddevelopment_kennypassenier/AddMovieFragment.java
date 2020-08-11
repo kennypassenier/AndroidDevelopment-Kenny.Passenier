@@ -1,4 +1,4 @@
-package com.example.androiddevelopment_kennypassenier;
+package com.kennypassenier.androiddevelopment_kennypassenier;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -18,9 +18,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.androiddevelopment_kennypassenier.models.AddMovieDelegate;
-import com.example.androiddevelopment_kennypassenier.models.Movie;
-import com.example.androiddevelopment_kennypassenier.models.MovieDatabase;
+import com.kennypassenier.androiddevelopment_kennypassenier.models.AddMovieDelegate;
+import com.kennypassenier.androiddevelopment_kennypassenier.models.Movie;
+import com.kennypassenier.androiddevelopment_kennypassenier.models.MovieDatabase;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 

@@ -1,4 +1,4 @@
-package com.example.androiddevelopment_kennypassenier.models;
+package com.kennypassenier.androiddevelopment_kennypassenier.models;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

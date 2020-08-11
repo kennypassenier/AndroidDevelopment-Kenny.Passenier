@@ -1,4 +1,4 @@
-package com.example.androiddevelopment_kennypassenier;
+package com.kennypassenier.androiddevelopment_kennypassenier;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -13,10 +13,10 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import com.example.androiddevelopment_kennypassenier.models.FetchImageService;
-import com.example.androiddevelopment_kennypassenier.models.GetSingleMoviesDelegate;
-import com.example.androiddevelopment_kennypassenier.models.Movie;
-import com.example.androiddevelopment_kennypassenier.models.MovieDatabase;
+import com.kennypassenier.androiddevelopment_kennypassenier.models.FetchImageService;
+import com.kennypassenier.androiddevelopment_kennypassenier.models.GetSingleMoviesDelegate;
+import com.kennypassenier.androiddevelopment_kennypassenier.models.Movie;
+import com.kennypassenier.androiddevelopment_kennypassenier.models.MovieDatabase;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 

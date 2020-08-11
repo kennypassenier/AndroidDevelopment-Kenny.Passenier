@@ -1,4 +1,4 @@
-package com.example.androiddevelopment_kennypassenier;
+package com.kennypassenier.androiddevelopment_kennypassenier;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
