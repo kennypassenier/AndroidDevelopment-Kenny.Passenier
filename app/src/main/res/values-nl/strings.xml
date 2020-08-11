@@ -13,4 +13,6 @@
     <string name="darkModeSwitchText">Schakel de donkere modus in</string>
     <string name="standardLoadingText">Info wordt ingeladen</string>
     <string name="movieImageContentDescription">Poster afbeelding</string>
+    <string name="jsonException">Data werd niet gevonden online</string>
+    <string name="volleyException">Er is iets mis gegaan met onze request</string>
 </resources>

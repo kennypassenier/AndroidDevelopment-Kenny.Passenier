@@ -13,5 +13,7 @@
     <string name="darkModeSwitchText">Toggle dark mode</string>
     <string name="standardLoadingText">Loading data</string>
     <string name="movieImageContentDescription">Poster image</string>
+    <string name="jsonException">Couldn\'t find data online</string>
+    <string name="volleyException">Something has gone wrong with our request</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

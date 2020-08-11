@@ -21,6 +21,8 @@ import com.android.volley.toolbox.Volley;
 import com.example.androiddevelopment_kennypassenier.models.AddMovieDelegate;
 import com.example.androiddevelopment_kennypassenier.models.Movie;
 import com.example.androiddevelopment_kennypassenier.models.MovieDatabase;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,8 +37,6 @@ public class AddMovieFragment extends Fragment implements AddMovieDelegate {
         // Required empty public constructor
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,19 +48,11 @@ public class AddMovieFragment extends Fragment implements AddMovieDelegate {
 
         mAddNewMovieButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 // Only do something if mAddNewMovieText has some information
                 if(!mAddNewMovieText.getText().toString().isEmpty()){
                     // Send request to omdb and check the result.
-
                     String dataUrl = "https://www.omdbapi.com/?i=tt0944947&plot=full&apikey=48ba3731";
-                    //String testData = OMDBDataSingleton.getInstance().downloadPlainText(dataUrl);
-
-                    // todo once we have the json data, we can insert the data into our database
-
-
-
-
 
                     // Instantiate the RequestQueue.
                     RequestQueue queue = Volley.newRequestQueue(getContext());
@@ -71,9 +63,7 @@ public class AddMovieFragment extends Fragment implements AddMovieDelegate {
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
-
                                     // Correcte response
-
                                     try {
                                         // Response omzetten naar JSON
                                         JSONObject jsonObject = new JSONObject(response);
@@ -91,30 +81,25 @@ public class AddMovieFragment extends Fragment implements AddMovieDelegate {
                                         newMovie.setPosterUrl(posterUrl);
                                         // Nieuwe film toevoegen aan de database
                                         new AddSingleMovieAsyncTask(AddMovieFragment.this).execute(newMovie);
-
-
-                                    } catch (JSONException e) {
-
-                                        // Todo iets met deze error doen, foute responses afvangen
+                                    }
+                                    catch (JSONException e) {
+                                        Snackbar snackbar = Snackbar.make(view, R.string.jsonException, BaseTransientBottomBar.LENGTH_SHORT);
+                                        snackbar.show();
                                         e.printStackTrace();
                                     }
-
-
                                 }
                             }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            mAddNewMovieText.setText(error.toString());
+                            Snackbar snackbar = Snackbar.make(view, R.string.volleyException, BaseTransientBottomBar.LENGTH_SHORT);
+                            snackbar.show();
                         }
                     });
-
                     // Add the request to the RequestQueue.
                     queue.add(stringRequest);
-
                 }
             }
         });
-
         return view;
     }
 
