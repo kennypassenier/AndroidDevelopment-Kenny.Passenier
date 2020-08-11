@@ -31,7 +31,6 @@ public class AddMovieFragment extends Fragment implements AddMovieDelegate {
 
 
     private EditText mAddNewMovieText;
-    private Button mAddNewMovieButton;
 
     public AddMovieFragment() {
         // Required empty public constructor
@@ -43,17 +42,15 @@ public class AddMovieFragment extends Fragment implements AddMovieDelegate {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_movie, container, false);
 
-        mAddNewMovieButton = view.findViewById(R.id.addNewMovieButton);
+        Button addNewMovieButton = view.findViewById(R.id.addNewMovieButton);
         mAddNewMovieText = view.findViewById(R.id.txtNewMovieName);
 
-        mAddNewMovieButton.setOnClickListener(new View.OnClickListener() {
+        addNewMovieButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
                 // Only do something if mAddNewMovieText has some information
                 if(!mAddNewMovieText.getText().toString().isEmpty()){
                     // Send request to omdb and check the result.
-                    String dataUrl = "https://www.omdbapi.com/?i=tt0944947&plot=full&apikey=48ba3731";
-
                     // Instantiate the RequestQueue.
                     RequestQueue queue = Volley.newRequestQueue(getContext());
                     String url = String.format("https://www.omdbapi.com/?t=%s&plot=full&apikey=48ba3731", mAddNewMovieText.getText().toString());
@@ -111,9 +108,9 @@ public class AddMovieFragment extends Fragment implements AddMovieDelegate {
         startActivity(intent);
     }
 
-    public class AddSingleMovieAsyncTask extends AsyncTask<Movie, Void, Void> {
-        private MovieDatabase db;
-        private AddMovieDelegate mAddMovieDelegate;
+    public static class AddSingleMovieAsyncTask extends AsyncTask<Movie, Void, Void> {
+        private final MovieDatabase db;
+        private final AddMovieDelegate mAddMovieDelegate;
 
         public AddSingleMovieAsyncTask(AddMovieDelegate delegate) {
             this.mAddMovieDelegate = delegate;
@@ -132,6 +129,4 @@ public class AddMovieFragment extends Fragment implements AddMovieDelegate {
             mAddMovieDelegate.onMovieAdded();
         }
     }
-
-
 }

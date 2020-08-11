@@ -16,9 +16,8 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
     // Hier komen de custom animaties die we bij transities gebruiken
+
     <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
         <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>

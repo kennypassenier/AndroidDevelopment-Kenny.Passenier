@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dark_mode_switch_fragment" />
+        app:layout_constraintTop_toBottomOf="@+id/dark_mode_switch_fragment"
+        tools:ignore="FragmentTagUsage" />
 
     <fragment
         android:id="@+id/dark_mode_switch_fragment"
@@ -29,5 +30,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.060000002"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:ignore="FragmentTagUsage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

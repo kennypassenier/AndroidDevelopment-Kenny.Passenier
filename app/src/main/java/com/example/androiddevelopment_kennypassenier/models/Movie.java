@@ -1,16 +1,12 @@
 package com.example.androiddevelopment_kennypassenier.models;
 
-import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.List;
-
 // We veranderen de naam van de tabel naar het meervoud
 @Entity(tableName = "movies")
 public class Movie {
-
     @PrimaryKey(autoGenerate = true)
     private long id;
     @ColumnInfo(name = "title")
@@ -23,11 +19,9 @@ public class Movie {
     private Integer releaseDate;
     @ColumnInfo(name = "posterUrl")
     private String posterUrl;
-
     public Movie(){
 
     }
-
     @Override
     public String toString(){
         return title + " - " + releaseDate;
@@ -49,8 +43,6 @@ public class Movie {
         this.title = title;
     }
 
-
-
     public String getDirector() {
         return director;
     }
@@ -58,8 +50,6 @@ public class Movie {
     public void setDirector(String director) {
         this.director = director;
     }
-
-
 
     public String getPlot() {
         return plot;

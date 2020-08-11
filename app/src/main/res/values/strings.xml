@@ -5,7 +5,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="addMovieButton">Add new movie</string>
     <string name="movieName">Name of the movie</string>
-    <string name="movieAddedText">Movie has been added to the database</string>
     <string name="director">Director</string>
     <string name="plot">Plot</string>
     <string name="releaseDate">Release date</string>
@@ -15,5 +14,6 @@
     <string name="movieImageContentDescription">Poster image</string>
     <string name="jsonException">Couldn\'t find data online</string>
     <string name="volleyException">Something has gone wrong with our request</string>
+    <string name="movieIdException">Movie ID not found</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

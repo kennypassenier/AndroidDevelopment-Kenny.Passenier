@@ -27,7 +27,6 @@ public class MainListViewFragment extends Fragment implements GetAllMoviesDelega
 
     private ListView mListView;
     private List<Movie> mMovies;
-    private ArrayAdapter mListViewAdapter;
 
 
     public MainListViewFragment() {
@@ -38,7 +37,6 @@ public class MainListViewFragment extends Fragment implements GetAllMoviesDelega
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list_view, container, false);
-
         // Instantieer een lege lijst om null reference te voorkomen
         mMovies = new ArrayList<Movie>();
         // Start een async task
@@ -67,13 +65,13 @@ public class MainListViewFragment extends Fragment implements GetAllMoviesDelega
     }
 
     private void updateAdapter() {
-        mListViewAdapter = new ArrayAdapter<>(
+        ArrayAdapter listViewAdapter = new ArrayAdapter<>(
                 getActivity(),
                 android.R.layout.simple_list_item_1,
                 mMovies
         );
 
-        mListView.setAdapter(mListViewAdapter);
+        mListView.setAdapter(listViewAdapter);
     }
 
     // Call naar asyncTask zodat we de UI thread vrijwaren van een zware taak.
@@ -89,9 +87,9 @@ public class MainListViewFragment extends Fragment implements GetAllMoviesDelega
         updateAdapter();
     }
 
-    public class GetAllMoviesAsyncTask extends AsyncTask<List<Movie>, Void, List<Movie>>{
-        private MovieDatabase db;
-        private GetAllMoviesDelegate mGetAllMoviesDelegate;
+    public static class GetAllMoviesAsyncTask extends AsyncTask<List<Movie>, Void, List<Movie>>{
+        private final MovieDatabase db;
+        private final GetAllMoviesDelegate mGetAllMoviesDelegate;
 
         public GetAllMoviesAsyncTask(GetAllMoviesDelegate delegate) {
             this.db = MainActivity.mMovieDatabase;

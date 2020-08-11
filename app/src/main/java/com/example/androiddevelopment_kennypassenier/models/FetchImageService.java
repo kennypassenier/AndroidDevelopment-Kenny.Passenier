@@ -18,18 +18,15 @@ public class FetchImageService extends IntentService {
     private static final String TAG = "FetchImageService";
     public static final String NOTIFY_IMAGE ="com.example.androiddevelopment_kennypassenier.models.FetchImageService.total";
 
-    private Intent mImageIntent;
+    private final Intent mImageIntent;
 
     // Todo use class
     public FetchImageService()
     {
         super(TAG);
-
         // Prepareer intents die gebruikt worden bij broadcast -> momenteel maar 1
         mImageIntent = new Intent();
         mImageIntent.setAction(NOTIFY_IMAGE);
-
-
     }
 
     @Override
@@ -44,7 +41,6 @@ public class FetchImageService extends IntentService {
                 connection.setDoInput(true);
                 connection.connect();
                 InputStream input = connection.getInputStream();
-                //input.close();
                 posterImage = BitmapFactory.decodeStream(input);
                 mImageIntent.putExtra("posterImage", posterImage);
                 LocalBroadcastManager.getInstance(this).sendBroadcast(mImageIntent);
@@ -52,7 +48,6 @@ public class FetchImageService extends IntentService {
                 Log.d(TAG, "onHandleIntent: IOException");
                 e.printStackTrace();
             }
-
         }
     }
 }
