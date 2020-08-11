@@ -7,137 +7,111 @@
     tools:context=".MovieDetailInfoFragment">
 
 
-        <ImageView
-            android:id="@+id/imgPlot"
-            android:layout_width="0dp"
-            android:layout_height="250dp"
-            android:layout_marginTop="8dp"
-            android:contentDescription="@string/movieImageContentDescription"
-            app:layout_constraintBottom_toTopOf="@+id/txtLabelTitle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <TextView
-            android:id="@+id/txtLabelTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title"
-            app:layout_constraintBottom_toTopOf="@+id/txtTitle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgPlot" />
-
-        <TextView
-            android:id="@+id/txtTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/standardLoadingText"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/txtLabelDirector"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtLabelTitle" />
-
-        <TextView
-            android:id="@+id/txtLabelDirector"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/director"
-            app:layout_constraintBottom_toTopOf="@+id/txtDirector"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
-
-        <TextView
-            android:id="@+id/txtDirector"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/txtLabelReleaseDate"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtLabelDirector"
-            tools:text="@string/standardLoadingText" />
-
-        <TextView
-            android:id="@+id/txtLabelReleaseDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/releaseDate"
-            app:layout_constraintBottom_toTopOf="@+id/txtReleaseDate"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtDirector" />
-
-        <TextView
-            android:id="@+id/txtReleaseDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/txtLabelPlot"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtLabelReleaseDate"
-            tools:text="@string/standardLoadingText" />
-
-        <TextView
-            android:id="@+id/txtLabelPlot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/plot"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtReleaseDate" />
-
-
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="321dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtLabelPlot">
+            android:weightSum="5">
 
-                <ScrollView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:scrollbarStyle="insideOverlay">
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
 
-                        <LinearLayout
+                        <ImageView
+                            android:id="@+id/imgPlot"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="8dp"
+                            android:contentDescription="@string/movieImageContentDescription"
+                            tools:srcCompat="@tools:sample/avatars" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtLabelTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:gravity="center_horizontal"
+                            android:text="@string/title" />
 
-                                <TextView
-                                    android:id="@+id/txtPlot"
+                        <TextView
+                            android:id="@+id/txtTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="@string/standardLoadingText"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txtLabelDirector"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="@string/director" />
+
+                        <TextView
+                            android:id="@+id/txtDirector"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:textSize="18sp"
+                            tools:text="@string/standardLoadingText" />
+
+                        <TextView
+                            android:id="@+id/txtLabelReleaseDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="@string/releaseDate" />
+
+                        <TextView
+                            android:id="@+id/txtReleaseDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:textSize="18sp"
+                            tools:text="@string/standardLoadingText" />
+
+                        <TextView
+                            android:id="@+id/txtLabelPlot"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:text="@string/plot" />
+
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:scrollbarStyle="insideOverlay">
+
+                                <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:gravity="center_horizontal"
-                                    android:paddingLeft="16dp"
-                                    android:paddingRight="16dp"
-                                    android:paddingBottom="50dp"
-                                    android:text="@string/standardLoadingText" />
-                        </LinearLayout>
-                </ScrollView>
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/txtPlot"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center_horizontal"
+                                            android:paddingLeft="16dp"
+                                            android:paddingRight="16dp"
+                                            android:paddingBottom="50dp"
+                                            android:text="@string/standardLoadingText" />
+                                </LinearLayout>
+                        </ScrollView>
+
+                </LinearLayout>
         </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
