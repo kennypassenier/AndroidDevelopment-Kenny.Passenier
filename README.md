@@ -40,6 +40,7 @@ Vereisten:
 
 Optionele componenten
 * Automatische UI Testing
+  - Er zijn twee tests via Espresso die de verschillende functionaliteiten testen van de UI
 * Testen met behulp van monkeyrunner
 * Gebruik van een broadcast receiver
   - De MovieDetailActivity gebruikt een BroadcastReceiver om het resultaat van de FetchImageService (IntentService) naar een dochter fragment MovieDetailInfoFragment die het vervolgens gebruikt om de afbeelding weer te geven in een ImageView
