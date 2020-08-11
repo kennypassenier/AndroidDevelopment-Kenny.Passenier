@@ -57,5 +57,5 @@ Optionele componenten
 * Bluetooth, NFC
 * Android Wear uitbreidingen op je app
 * App is voorbereid voor publicatie of werd gepubliceerd
-
+  - De app is onder review, als die in orde is, staat hij in de Play Store
 
