@@ -57,5 +57,5 @@ Optionele componenten
 * Bluetooth, NFC
 * Android Wear uitbreidingen op je app
 * App is voorbereid voor publicatie of werd gepubliceerd
-  - De app is onder review, als die in orde is, staat hij in de Play Store
+  - [Play Store](https://play.google.com/store/apps/details?id=com.kennypassenier.androiddevelopment_kennypassenier)
 
